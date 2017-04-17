@@ -191,13 +191,10 @@ module ActionView
           end
           value = options.fetch(:selected) { value(object) }
           priority_regions = options[:priority] || []
-          opts = add_options(region_options_for_select(parent_region.subregions, value, 
-                                                      :priority => priority_regions), 
-                             options, value)
+          opts = add_options(region_options_for_select(parent_region.subregions, value, priority: priority_regions), options, value)
           select = content_tag("select", opts, html_options)
           if html_options["multiple"] && options.fetch(:include_hidden, true)
-            tag("input", :disabled => html_options["disabled"], :name => html_options["name"], 
-                         :type => "hidden", :value => "") + select
+            tag("input", disabled: html_options["disabled"], name: html_options["name"], type: "hidden", value: "") + select
           else
             select
           end

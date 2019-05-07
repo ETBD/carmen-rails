@@ -189,7 +189,7 @@ module ActionView
             raise ArgumentError, "include_blank cannot be false for a required field." if options[:include_blank] == false
             options[:include_blank] ||= true unless options[:prompt]
           end
-          value = options.fetch(:selected) { value(object) }
+          value = options.fetch(:selected) { method(:value).arity.zero? ? value : value(object) }
           priority_regions = options[:priority] || []
           opts = add_options(region_options_for_select(parent_region.subregions, value, priority: priority_regions), options, value)
           select = content_tag("select", opts, html_options)
